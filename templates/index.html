@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
     <title>Our fab CodeJame website</title>
 </head>
 <body>
@@ -10,6 +12,17 @@
 {% else %}
     <h1> Welcome! </h1>
 {% endif %}
+
+<div id="send-email">
+    <h1> Send email to maria</h1>
+    {% if email %}
+        <h3> We attempted to send an email and the feedback is {{ email }}! </h3>
+    {% else %}
+        <form method="post" action="/email">
+            <input id="email-button" value="Send" type="submit"/>
+        </form>
+    {% endif %}
+</div>
 
 <div id="contact-form">
     <h1> Signup to our interesting email list </h1>
