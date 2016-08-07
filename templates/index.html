@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Our fab CodeJame website</title>
+</head>
+<body>
+{% if name %}
+    <h1> Welcome {{ name }}! </h1>
+{% else %}
+    <h1> Welcome! </h1>
+{% endif %}
+
+<div id="contact-form">
+    <h1> Signup to our interesting email list </h1>
+    <form method="post" action="/signup">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" value="" placeholder="Enter your name" required="required" autofocus="autofocus" />
+        <br /><br />
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email" value="" placeholder="youremail@domain.com" required="required"/>
+        <br /><br />
+        <input id="submit-button" value="Signup" type="submit"/>
+    </form>
+</div>
+
+</body>
+</html>
