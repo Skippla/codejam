@@ -24,6 +24,20 @@
     {% endif %}
 </div>
 
+
+<div id="get-weather">
+    <h1> Enter a city to know how the weather is there</h1>
+    {% if weather %}
+        <h3> {{ weather }} </h3>
+    {% else %}
+        <form method="post" action="/weather">
+            <label for="email">City:</label>
+            <input type="text" id="city" name="city" value="" placeholder="London" required="required"/>
+            <input id="weather-button" value="Get weather" type="submit"/>
+        </form>
+    {% endif %}
+</div>
+
 <div id="contact-form">
     <h1> Signup to our interesting email list </h1>
     <form method="post" action="/signup">
