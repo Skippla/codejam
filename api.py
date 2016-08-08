@@ -1,5 +1,6 @@
 import constants
 import requests
+import tweepy
 
 class Mailgun():
     def send(self, to, subject, msg):
@@ -17,3 +18,10 @@ class Weather():
         payload = {"q": name, "appid": constants.WHEATHER_KEY}
         print endpoint, payload
         return requests.get(endpoint, params=payload)
+
+class Twitter():
+    def getTweetsForTag(self, tag):
+        auth = tweepy.OAuthHandler(consumer_key=constants.TWITTER_CONSUMER_KEY,consumer_secret=constants.TWITTER_CONSUMER_SECRET)
+        auth.set_access_token(key=constants.TWITTER_KEY,secret=constants.TWITTER_SECRET)
+        api = tweepy.API(auth)
+        return api.search(q="Stemettes")

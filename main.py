@@ -51,6 +51,17 @@ def weather():
     msg = u"It's {}ºC in {} {}, and the sky is {} ".format(temp, city, country, weather)
     return render_template("index.html", weather=msg)
 
+@app.route("/tweets", methods=['POST'])
+def twitter():
+    t = Twitter()
+    form_data = request.form
+    tag = form_data['tag']
+    result = t.getTweetsForTag(tag)
+    tweets = []
+    for tweet in result:
+        tweets.append(u"{} - {}".format(tweet.user.name,tweet.text))
+    return render_template("index.html", tweets=tweets)
+
 
 if __name__ == "__main__":
     app.run()
