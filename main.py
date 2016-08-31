@@ -62,6 +62,20 @@ def twitter():
         tweets.append(u"{} - {}".format(tweet.user.name,tweet.text))
     return render_template("index.html", tweets=tweets)
 
+@app.route("/foursquare", methods=['POST'])
+def foursquare():
+    f = Foursquare()
+    form_data = request.form
+    location = form_data['location']
+    result = f.exploreVenues(location).json()
+    venues = []
+    for item in result['response']['groups'][0]['items']:
+        name = item['venue']['name']
+        rating = item['venue']['rating']
+        address = ", ".join(item['venue']['location']['formattedAddress'])
+        venues.append(u"Name: {}, Rating: {}, Address: {}".format(name, rating, address))
+    return render_template("index.html", venues=venues)
 
 if __name__ == "__main__":
+    app.debug = True
     app.run()

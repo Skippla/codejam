@@ -15,7 +15,7 @@ class Mailgun():
 class Weather():
     def weatherByCity(self, name):
         endpoint = "http://api.openweathermap.org/data/2.5/weather"
-        payload = {"q": name, "appid": constants.WHEATHER_KEY}
+        payload = {"q": name, "units": "metric", "appid": constants.WHEATHER_KEY}
         print endpoint, payload
         return requests.get(endpoint, params=payload)
 
@@ -25,3 +25,18 @@ class Twitter():
         auth.set_access_token(key=constants.TWITTER_KEY,secret=constants.TWITTER_SECRET)
         api = tweepy.API(auth)
         return api.search(q="Stemettes")
+
+class Foursquare():
+    def exploreVenues(self, name):
+        '''
+        Returns a list of Foursquare recommended venues near the location given by parameter name (e.g. London, St Paul's Cathedral etc.)
+        '''
+        endpoint = "https://api.foursquare.com/v2/venues/explore"
+        params = {"near": name,
+                  "section": "food",
+                  "limit": 5,
+                  "client_id": constants.FOURSQUARE_CLIENT_ID,
+                  "client_secret": constants.FOURSQUARE_CLIENT_SECRET,
+                  "v": "20160831",
+                  "m": "foursquare"}
+        return requests.get(endpoint, params=params)

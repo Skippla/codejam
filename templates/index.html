@@ -61,7 +61,18 @@
     {% for tweet in tweets %}
         <h4> {{ tweet }} </h4>
     {% endfor %}
+</div>
 
+<div id="get-venues">
+    <h1> Get venues near a specific location with Foursquare </h1>
+    <form method="post" action="/foursquare">
+        <label for="email">Location:</label>
+        <input type="text" id="location" name="location" value="" placeholder="St Paul's Cathedral" required="required"/>
+        <input id="find-button" value="Search" type="submit"/>
+    </form>
+    {% for venue in venues %}
+        <h4> {{ venue }} </h4>
+    {% endfor %}
 </div>
 
 </body>
