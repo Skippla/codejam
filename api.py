@@ -1,6 +1,9 @@
 import constants
 import requests
 import tweepy
+from uber_rides.session import Session
+from uber_rides.client import UberRidesClient
+
 
 class Mailgun():
     def send(self, to, subject, msg):
@@ -40,3 +43,11 @@ class Foursquare():
                   "v": "20160831",
                   "m": "foursquare"}
         return requests.get(endpoint, params=params)
+
+class UberRides():
+    def getProducts(self, longitude, latitude):
+        session = Session(server_token=constants.UBER_SESSION_TOKEN)
+        client = UberRidesClient(session)
+        response = client.get_products(longitude, latitude)
+        return response.json.get('products')
+

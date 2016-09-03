@@ -76,6 +76,15 @@ def foursquare():
         venues.append(u"Name: {}, Rating: {}, Address: {}".format(name, rating, address))
     return render_template("index.html", venues=venues)
 
+@app.route("/uber", methods=['POST'])
+def uber_product():
+    u = UberRides()
+    form_data = request.form
+    longitude = form_data['longitude']
+    latitude = form_data['latitude']
+    products = u.getProducts(longitude, latitude)
+    return render_template("index.html", products=products)
+
 if __name__ == "__main__":
     app.debug = True
     app.run()

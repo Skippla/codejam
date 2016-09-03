@@ -75,5 +75,25 @@
     {% endfor %}
 </div>
 
+<div id="get-uber-products">
+    <h1> Request Uber products </h1>
+    <form method="post" action="/uber">
+        <label for="longitude">Longitude:</label>
+        <input type="text" id="longitude" name="longitude" value="" placeholder="Enter longitude" required="required" autofocus="autofocus" required />
+        <br /><br />
+        <label for="latitude">Latitude:</label>
+        <input type="text" id="latitude" name="latitude" value="" placeholder="Enter latitude" required="required"/>
+        <br /><br />
+        <input id="uber-submit" value="Get Product" type="submit"/>
+    </form>
+
+    {% for product in products %}
+        <img src="{{ product.image }}"><br>
+        <h4> {{ product.display_name }} </h4>
+    {% else %}
+        <h4> No products found for this location </h4>
+    {% endfor %}
+</div>
+
 </body>
 </html>
