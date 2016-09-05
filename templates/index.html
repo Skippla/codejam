@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
     <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    {#  Leaflet maps #}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/leaflet.css') }}">
+    <script src="{{ url_for('static', filename='js/leaflet.js') }}"></script>
+
     <title>Our fab CodeJame website</title>
 </head>
 <body>
@@ -93,6 +98,12 @@
     {% else %}
         <h4> No products found for this location </h4>
     {% endfor %}
+</div>
+
+<div id="show-map">
+    <h1> Interactive map </h1>
+    <div id="leaflet-map"></div>
+    {#  See static/js/main.js for js code that displays the map #}
 </div>
 
 </body>
