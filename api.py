@@ -3,6 +3,8 @@ import requests
 import tweepy
 from uber_rides.session import Session
 from uber_rides.client import UberRidesClient
+import aftership
+
 
 
 class Mailgun():
@@ -45,9 +47,24 @@ class Foursquare():
         return requests.get(endpoint, params=params)
 
 class UberRides():
+    session = Session(server_token=constants.UBER_SESSION_TOKEN)
     def getProducts(self, longitude, latitude):
-        session = Session(server_token=constants.UBER_SESSION_TOKEN)
-        client = UberRidesClient(session)
+        client = UberRidesClient(self.session)
         response = client.get_products(longitude, latitude)
         return response.json.get('products')
+
+class AfterShip():
+
+    aftershipApi = aftership.APIv4(constants.AFTERSHIP_API_KEY)
+
+    def getAllCouriers(self):
+        return self.aftershipApi.couriers.all.get()
+
+    def createShipment(self,slug,number,Title):
+        return self.aftershipApi.trackings.post(tracking=dict(slug=slug,tracking_number=number, title="Title"))
+
+    def getTrackingInfo(self,slug,number):
+        return self.aftershipApi.trackings.get(slug, number)
+
+
 

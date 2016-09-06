@@ -85,6 +85,16 @@ def uber_product():
     products = u.getProducts(longitude, latitude)
     return render_template("index.html", products=products)
 
+@app.route("/aftership", methods=['POST'])
+def aftership_Create_Shipment():
+    a = AfterShip()
+    form_data = request.form
+    slug = form_data['slug']
+    number = form_data['number']
+    title = form_data['title']
+    ShipmentInfo = a.createShipment(slug,number,title)
+    return render_template("index.html", ShipmentInfo=ShipmentInfo)
+
 if __name__ == "__main__":
     app.debug = True
     app.run()
