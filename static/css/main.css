@@ -1,6 +1,9 @@
-
-
 h1 {
-    color:blue;
-    font-size:20px;
-    }
+    color: blue;
+    font-size: 20px;
+}
+
+#leaflet-map {
+    height: 250px;
+    width: 500px;
+}
