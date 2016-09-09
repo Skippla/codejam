@@ -49,6 +49,9 @@ class Foursquare():
 class UberRides():
     session = Session(server_token=constants.UBER_SESSION_TOKEN)
     def getProducts(self, longitude, latitude):
+
+        '''Returns types of cars available for in a specific area'''
+
         client = UberRidesClient(self.session)
         response = client.get_products(longitude, latitude)
         return response.json.get('products')
@@ -58,12 +61,21 @@ class AfterShip():
     aftershipApi = aftership.APIv4(constants.AFTERSHIP_API_KEY)
 
     def getAllCouriers(self):
+
+        '''Returns the names of couriers Aftership supports'''
+
         return self.aftershipApi.couriers.all.get()
 
     def createShipment(self,slug,number,Title):
-        return self.aftershipApi.trackings.post(tracking=dict(slug=slug,tracking_number=number, title="Title"))
+
+        '''Returns a dictionary of shipment information '''
+
+        return self.aftershipApi.trackings.post(tracking=dict(slug=slug,tracking_number=number, title="title"))
 
     def getTrackingInfo(self,slug,number):
+
+        '''Returns the tracking information of a parcel'''
+
         return self.aftershipApi.trackings.get(slug, number)
 
 
