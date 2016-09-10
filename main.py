@@ -80,9 +80,9 @@ def foursquare():
 def uber_product():
     u = UberRides()
     form_data = request.form
-    longitude = form_data['longitude']
     latitude = form_data['latitude']
-    products = u.getProducts(longitude, latitude)
+    longitude = form_data['longitude']
+    products = u.getProducts(latitude, longitude)
     return render_template("index.html", products=products)
 
 @app.route("/aftership", methods=['POST'])

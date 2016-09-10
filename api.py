@@ -48,12 +48,12 @@ class Foursquare():
 
 class UberRides():
     session = Session(server_token=constants.UBER_SESSION_TOKEN)
-    def getProducts(self, longitude, latitude):
+    def getProducts(self, latitude, longitude):
 
         '''Returns types of cars available for in a specific area'''
 
         client = UberRidesClient(self.session)
-        response = client.get_products(longitude, latitude)
+        response = client.get_products(latitude, longitude)
         return response.json.get('products')
 
 class AfterShip():
