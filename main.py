@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+import os
 from flask import Flask
 from flask import render_template
 from flask import request
@@ -7,6 +8,7 @@ from api import *
 
 app = Flask(__name__)
 
+    
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -95,6 +97,4 @@ def aftership_Create_Shipment():
     ShipmentInfo = a.createShipment(slug,number,title)
     return render_template("index.html", ShipmentInfo=ShipmentInfo)
 
-if __name__ == "__main__":
-    app.debug = True
-    app.run()
+app.run(host=os.getenv('IP', '0.0.0.0'),port=int(os.getenv('PORT', 8080)))
