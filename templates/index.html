@@ -23,6 +23,21 @@
         <h3> We attempted to send an email and the feedback is {{ email }}! </h3>
     {% else %}
         <form method="post" action="/email">
+            <label for="email">City:</label>
+            <input type="text" id="emailinput" name="emailinput" value="Maria <maria.arinbjarnar@gmail.com>" required="required"/>
+            <input id="email-button" value="Send" type="submit"/>
+        </form>
+    {% endif %}
+</div>
+
+<div id="send-email-many">
+    <h1> Send email to maria and maria</h1>
+    {% if email %}
+        <h3> We attempted to send an email and the feedback is {{ email }}! </h3>
+    {% else %}
+        <form method="post" action="/email">
+            <input type="text" id="emailinputtomany" name="emailinput" value="Maria <maria.arinbjarnar@gmail.com>, York <maria@cs.york.ac.uk>" 
+                required="required"/>
             <input id="email-button" value="Send" type="submit"/>
         </form>
     {% endif %}

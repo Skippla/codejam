@@ -28,13 +28,14 @@ def sign_up():
 
 @app.route("/email", methods=['POST'])
 def email():
-    to = "Maria <maria.arinbjarnar@gmail.com>",
-    subject = "Hello Maria",
+    form_data = request.form
+    emails = [e.strip() for e in form_data['emailinput'].split(',')]
+    print emails
+    subject = "Hello Maria"
     msg = "Congratulations Maria, you just sent an email with Mailgun!  You are truly awesome!  " \
-            "You can see a record of this email in your logs: https://mailgun.com/cp/log .  " \
             "You can send up to 300 emails/day from this sandbox server. "
     m = Mailgun()
-    result = m.send(to,subject,msg)
+    result = m.send(emails,subject,msg)
     return render_template("index.html", email=result.status_code)
 
 
