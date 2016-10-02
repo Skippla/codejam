@@ -6,14 +6,10 @@
     <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
     {# Bootstrap Core CSS and JavaScript #}
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.css') }}"/>
-{#    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap-theme.css') }}"/>#}
     <script src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
     {#  LeafletJS Core CSS and JavaScript #}
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/leaflet.css') }}">
     <script src="{{ url_for('static', filename='js/leaflet.js') }}"></script>
-    {# Custom Fonts #}
-{#    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/font-awesome.min.css') }}"/>#}
-
     {# Custom CSS #}
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
     {# Custom JavaScript #}
@@ -29,7 +25,7 @@
     <div class="container topnav">
         {# left hand-side #}
         <div class="navbar-header">
-            <a class="navbar-brand topnav" href="/"><i class="fa fa-home fa-fw"></i> CODEJAM </a>
+            <a class="navbar-brand topnav" href="/"><i class="fa fa-home fa-fw"></i> HOME </a>
         </div>
         {# right hand-side #}
         <div class="collapse navbar-collapse">
@@ -38,13 +34,13 @@
                     <a href="#send-email">Mailgun</a>
                 </li>
                 <li>
-                    <a href="#get-weather">WeatherAPI</a>
-                </li>
-                <li>
-                    <a href="#contact-form">API3</a>
+                    <a href="#contact-form">Signup</a>
                 </li>
                 <li>
                     <a href="#get-tweets">Tweepy</a>
+                </li>
+                <li>
+                    <a href="#get-weather">OpenWeather</a>
                 </li>
                 <li>
                     <a href="#get-venues">Foursquare</a>
@@ -53,10 +49,10 @@
                     <a href="#get-uber-products">Uber</a>
                 </li>
                 <li>
-                    <a href="#show-map">Map</a>
+                    <a href="#show-map">LeafletJS</a>
                 </li>
                 <li>
-                    <a href="#create-shipment">Shipment</a>
+                    <a href="#create-shipment">AfterShip</a>
                 </li>
             </ul>
         </div>
@@ -82,14 +78,16 @@
 <div class="content-section-a" id="send-email">
     <div class="container">
         <div class="row">
+            {# left hand side #}
             <div class="col-lg-5 col-sm-6">
                 <hr class="section-heading-spacer">
                 <div class="clearfix"></div>
                 <h2 class="section-heading">Send email to Maria</h2>
-                <p class="lead">Mailgun is a set of powerful APIs that allow you to send,receive and track email effortlessly.
-                    <a href = 'http://www.mailgun.com/'>Read more</a>
+                <p class="lead"><i>Mailgun</i> is a set of powerful APIs that allows sending, receiving and tracking email effortlessly. Try it out!
+                    <a href = 'http://www.mailgun.com/' target="_blank">Read more</a>
                 </p>
             </div>
+            {# right hand side #}
             <div class="col-lg-5 col-lg-offset-2 col-sm-6 right-col">
                 {% if email %}
                     <h3> We attempted to send an email and the feedback is {{ email }}! </h3>
@@ -116,14 +114,16 @@
 <div class="content-section-b" id="send-email-many">
     <div class="container">
         <div class="row">
+            {# left hand side #}
             <div class="col-lg-5 col-sm-6">
                 <hr class="section-heading-spacer">
                 <div class="clearfix"></div>
                 <h2 class="section-heading">Send email to Maria and Maria</h2>
-                <p class="lead">Mailgun is a set of powerful APIs that allow you to send,receive and track email effortlessly.
-                    <a href = 'http://www.mailgun.com/'>Read more</a>
+                <p class="lead"><i>Mailgun</i>, as any other API, provides a range of methods with different functionality, such as allowing to send emails to one vs. multiple email addresses.
+                    <a href = 'http://www.mailgun.com/' target="_blank">Read more</a>
                 </p>
             </div>
+            {# right hand side #}
             <div class="col-lg-5 col-lg-offset-2 col-sm-6 right-col">
                 {% if email %}
                     <h3> We attempted to send an email and the feedback is {{ email }}! </h3>
@@ -147,17 +147,92 @@
     </div>
 </div>
 
-<div class="content-section-a" id="get-weather">
+<div class="content-section-a" id="contact-form">
     <div class="container">
         <div class="row">
+            {# left hand side #}
             <div class="col-lg-5 col-sm-6">
                 <hr class="section-heading-spacer">
                 <div class="clearfix"></div>
-                <h2 class="section-heading">Enter a city to know how the weather is there</h2>
-                <p class="lead">Open weather api provides weather data,including current weather data,forecasts and historical data to the developers of web services and mobile applications.
-                    <a href = 'https://openweathermap.org/api'>Read more</a>
+                <h2 class="section-heading">Sign up to our interesting email list</h2>
+                <p class="lead">Simulating a login/signup or even subscribing to an email list is as easy as opening a new page. <i>Flask</i>, a Python web framework, makes this easy through routing.
+                    <a href = 'http://flask.pocoo.org/docs/0.11/quickstart/' target="_blank">Read more</a>
                 </p>
             </div>
+            {# right hand side #}
+            <div class="col-lg-5 col-lg-offset-2 col-sm-6 right-col">
+                <form class="form-horizontal" method="post" action="/signup">
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label">Name:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="name" name="name" value="" placeholder="Your name" required="required" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="col-sm-2 control-label">Email:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="email" name="email" value="" placeholder="youremail@domain.com" required="required"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-default" id="submit-button">Sign up</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content-section-b" id="get-tweets">
+    <div class="container">
+        <div class="row">
+            {# left hand side #}
+            <div class="col-lg-5 col-sm-6">
+                <hr class="section-heading-spacer">
+                <div class="clearfix"></div>
+                <h2 class="section-heading">Search for a trending topic on Twitter</h2>
+                <p class="lead"><i>Tweepy</i> integrates Twitter within websites. It can provide trending topic information in relation to a specific hashtag.
+                  <a href = 'http://docs.tweepy.org/en/v3.5.0/api.html' target="_blank">Read more</a>
+                </p>
+            </div>
+            {# right hand side #}
+            <div class="col-lg-5 col-lg-offset-2 col-sm-6 right-col">
+                <form class="form-horizontal" method="post" action="/tweets">
+                     <div class="form-group">
+                         <label for="tag" class="col-sm-2 control-label">Search tag:</label>
+                         <div class="col-sm-10">
+                            <input type="text" class="form-control" id="tag" name="tag" value="" placeholder="foodcodewknd" required="required"/>
+                         </div>
+                     </div>
+                     <div class="form-group">
+                         <div class="col-sm-offset-2 col-sm-10">
+                             <button type="submit" class="btn btn-default" id="twitter-button">Search</button>
+                         </div>
+                     </div>
+                </form>
+                {% for tweet in tweets %}
+                    <h4> {{ tweet }} </h4>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content-section-a" id="get-weather">
+    <div class="container">
+        <div class="row">
+            {# left hand side #}
+            <div class="col-lg-5 col-sm-6">
+                <hr class="section-heading-spacer">
+                <div class="clearfix"></div>
+                <h2 class="section-heading">Enter a city to know how the weather is like</h2>
+                <p class="lead">The <i>OpenWeather</i> API provides weather data, including historical and current data, as well as forecasts. The API documentation details the functionality and usage of the different features.
+                    <a href = 'https://openweathermap.org/api' target="_blank">Read more</a>
+                </p>
+            </div>
+            {# right hand side #}
             <div class="col-lg-5 col-lg-offset-2 col-sm-6 right-col">
                 {% if weather %}
                     <h3> {{ weather }} </h3>
@@ -181,82 +256,19 @@
     </div>
 </div>
 
-<div class="content-section-b" id="contact-form">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-5 col-sm-6">
-                <hr class="section-heading-spacer">
-                <div class="clearfix"></div>
-                <h2 class="section-heading">Signup to our interesting email list</h2>
-                <p class="lead">Some text here</p>
-            </div>
-            <div class="col-lg-5 col-lg-offset-2 col-sm-6 right-col">
-                <form class="form-horizontal" method="post" action="/signup">
-                    <div class="form-group">
-                        <label for="name" class="col-sm-2 control-label">Name:</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="name" name="name" value="" placeholder="Enter your name" required="required" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="email" class="col-sm-2 control-label">Email:</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="email" name="email" value="" placeholder="youremail@domain.com" required="required"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-default" id="submit-button">Sign up</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="content-section-a" id="get-tweets">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-5 col-sm-6">
-                <hr class="section-heading-spacer">
-                <div class="clearfix"></div>
-                <h2 class="section-heading">Search for something on Twitter</h2>
-                <p class="lead">Keeps you up to date with information trending on twitter in relation to a hashtag.</p>
-                  <a href = 'http://docs.tweepy.org/en/v3.5.0/api.html'>Read more</a>
-            </div>
-            <div class="col-lg-5 col-lg-offset-2 col-sm-6 right-col">
-                <form class="form-horizontal" method="post" action="/tweets">
-                     <div class="form-group">
-                         <label for="tag" class="col-sm-2 control-label">Search tag:</label>
-                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="tag" name="tag" value="" placeholder="foodcodewknd" required="required"/>
-                         </div>
-                     </div>
-                     <div class="form-group">
-                         <div class="col-sm-offset-2 col-sm-10">
-                             <button type="submit" class="btn btn-default" id="twitter-button">Search</button>
-                         </div>
-                     </div>
-                </form>
-                {% for tweet in tweets %}
-                    <h4> {{ tweet }} </h4>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
-</div>
-
 <div class="content-section-b" id="get-venues">
     <div class="container">
         <div class="row">
+            {# left hand side #}
             <div class="col-lg-5 col-sm-6">
                 <hr class="section-heading-spacer">
                 <div class="clearfix"></div>
                 <h2 class="section-heading">Get venues near a specific location with Foursquare</h2>
-                <p class="lead">Foursquare helps you find the perfect places to go with friends. Discover the best food, nightlife, and entertainment in your area.</p>
-                    <a href = 'https://developer.foursquare.com/'>Read more</a>
+                <p class="lead"><i>FoursquareAPI</i> helps you find the perfect places for food and entertainment in your area and see information about specific venues.
+                    <a href = 'https://developer.foursquare.com/' target="_blank">Read more</a>
+                </p>
             </div>
+            {# right hand side #}
             <div class="col-lg-5 col-lg-offset-2 col-sm-6 right-col">
                 <form class="form-horizontal" method="post" action="/foursquare">
                      <div class="form-group">
@@ -282,13 +294,16 @@
 <div class="content-section-a" id="get-uber-products">
     <div class="container">
         <div class="row">
+            {# left hand side #}
             <div class="col-lg-5 col-sm-6">
                 <hr class="section-heading-spacer">
                 <div class="clearfix"></div>
                 <h2 class="section-heading">Request Uber products</h2>
-                <p class="lead">Allows you to integrate uber services in your code.Enter the latitude and longitude of a location to get the type of services available.</p>
-                    <a href = 'https://developer.uber.com'>Read more</a>
+                <p class="lead"><i>Uber for developers</i> allows integrating Uber services in the code. One example would be getting the type of available services based on a location's latitude and longitude.
+                    <a href = 'https://developer.uber.com' target="_blank">Read more</a>
+                </p>
             </div>
+            {# right hand side #}
             <div class="col-lg-5 col-lg-offset-2 col-sm-6 right-col">
                 <form class="form-horizontal" method="post" action="/uber">
                     <div class="form-group">
@@ -312,8 +327,6 @@
                 {% for product in products %}
                     <img src="{{ product.image }}"><br>
                     <h4> {{ product.display_name }} </h4>
-{#                    {% else %}#}
-{#                        <h5 class="align-center"> No products found for this location </h5>#}
                 {% endfor %}
             </div>
         </div>
@@ -323,14 +336,16 @@
 <div class="content-section-b" id="show-map">
     <div class="container">
         <div class="row">
+            {# left hand side #}
             <div class="col-lg-5 col-sm-6">
                 <hr class="section-heading-spacer">
                 <div class="clearfix"></div>
-                <h2 class="section-heading">Interactive map with LeafletJS</h2>
-                <p class="lead">Mapbox is the mapping platform for developers. Build maps and applications on our simple and powerful APIs, and use our open source libraries for interactivity and control.
-                    <a href = 'https://www.mapbox.com/developers/'>Read more</a>
+                <h2 class="section-heading">Display an interactive map</h2>
+                <p class="lead"><i>LeafletJS</i> is a user-friendly and interactive mapping platform for developers that allows displaying maps and building applications using JavaScript.
+                    <a href = 'http://leafletjs.com/' target="_blank">Read more</a>
                 </p>
             </div>
+            {# right hand side #}
             <div class="col-lg-5 col-lg-offset-2 col-sm-6 right-col">
                 <div id="leaflet-map"></div>
                 {#  See static/js/main.js for js code that displays the map #}
@@ -342,14 +357,16 @@
 <div class="content-section-a" id="create-shipment">
     <div class="container">
         <div class="row">
+            {# left hand side #}
             <div class="col-lg-5 col-sm-6">
                 <hr class="section-heading-spacer">
                 <div class="clearfix"></div>
                 <h2 class="section-heading">Create Shipment</h2>
-                <p class="lead">AfterShip is a shipment tracking application and API for eCommerce retailers and buyers. Enter tracking number to view delivery status.
-                    <a href = 'https://www.aftership.com/'>Read more</a>
+                <p class="lead"><i>AfterShip</i> is a shipment tracking application and API that allows, among others, viewing delivery status by entering a tracking number.
+                    <a href = 'https://www.aftership.com/' target="_blank">Read more</a>
                 </p>
             </div>
+            {# right hand side #}
             <div class="col-lg-5 col-lg-offset-2 col-sm-6 right-col">
                 <form class="form-horizontal" method="post" action="/aftership">
                     <div class="form-group">
@@ -361,18 +378,18 @@
                     <div class="form-group">
                         <label for="number" class="col-sm-6 control-label">Tracking Number:</label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" id="number" name="number" placeholder="Enter tracking number" required="required"/>
+                            <input type="text" class="form-control" id="number" name="number" placeholder="Tracking number" required="required"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="title" class="col-sm-6 control-label">Shipment reference:</label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" id="title" name="title" placeholder="Enter shipment reference" required="required"/>
+                            <input type="text" class="form-control" id="title" name="title" placeholder="Shipment reference" required="required"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-6 col-sm-6">
-                            <button type="submit" class="btn btn-default" id="aftership-submit">Create shipment</button>
+                            <button type="submit" class="btn btn-default" id="aftership-submit">View shipment</button>
                         </div>
                     </div>
                 </form>
