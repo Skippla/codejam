@@ -65,6 +65,18 @@ def twitter():
         tweets.append(u"{} - {}".format(tweet.user.name,tweet.text))
     return render_template("index.html", tweets=tweets)
 
+@app.route("/tweet", methods=['POST'])
+def twitter():
+    t = Twitter()
+    form_data = request.form
+    tag = form_data['tag']
+    result = t.getTweetsForTag(tag)
+    tweets = []
+    for tweet in result:
+        tweets.append(u"{} - {}".format(tweet.user.name,tweet.text))
+    return render_template("index.html", tweets=tweets)
+
+
 @app.route("/foursquare", methods=['POST'])
 def foursquare():
     f = Foursquare()
