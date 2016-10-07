@@ -74,8 +74,20 @@
     <h1> Search for something on Twitter </h1>
     <form method="post" action="/tweets">
             <label for="tag">Search tag:</label>
+            <input type="text" id="tag" name="tag" value="" placeholder="Hello world" required="required"/>
+            <input id="twitter-post" value="Search" type="submit"/>
+    </form>
+    {% for tweet in tweets %}
+        <h4> {{ tweet }} </h4>
+    {% endfor %}
+</div>
+
+<div id="post-tweets">
+    <h1> Search for something on Twitter </h1>
+    <form method="post" action="/tweet">
+            <label for="tag">Search tag:</label>
             <input type="text" id="tag" name="tag" value="" placeholder="Stemettes" required="required"/>
-            <input id="twitter-button" value="Search" type="submit"/>
+            <input id="twitter-button" value="post" type="submit"/>
     </form>
     {% for tweet in tweets %}
         <h4> {{ tweet }} </h4>
