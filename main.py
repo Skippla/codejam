@@ -6,7 +6,8 @@ from flask import render_template
 from flask import request
 from api import *
 
-app = Flask(__name__)
+template_dir = os.path.dirname(os.path.abspath(__file__))
+app = Flask(__name__, template_folder=template_dir)
 
     
 @app.route("/")
@@ -65,16 +66,7 @@ def twitter():
         tweets.append(u"{} - {}".format(tweet.user.name,tweet.text))
     return render_template("index.html", tweets=tweets)
 
-@app.route("/tweet", methods=['POST'])
-def twitter():
-    t = Twitter()
-    form_data = request.form
-    tag = form_data['tag']
-    result = t.getTweetsForTag(tag)
-    tweets = []
-    for tweet in result:
-        tweets.append(u"{} - {}".format(tweet.user.name,tweet.text))
-    return render_template("index.html", tweets=tweets)
+
 
 
 @app.route("/foursquare", methods=['POST'])
