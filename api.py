@@ -8,11 +8,22 @@ import aftership
 
 
 class Mailgun():
-    def send(self, to, subject, msg):
+    def send(self, to, subject, msg): 
+        ''' Sends and email through the mailgun API
+        input is:
+        to - the email address or addresses of receivers
+        subject - the subject of the email
+        msg - the message in the email 
+        https://documentation.mailgun.com/quickstart.html
+        '''
+        
+        msg_url="https://api.mailgun.net/v3/{mail_token}.mailgun.org/messages".format(mail_token=constants.MAIL_TOKEN)
+        sender="Mailgun Sandbox <postmaster@{mail_token}.mailgun.org>".format(mail_token=constants.MAIL_TOKEN)
+        print msg_url, sender
         return requests.post(
-            "https://api.mailgun.net/v3/sandbox03a400ad1bbd421da31d9dcd3360f748.mailgun.org/messages",
+            msg_url,
             auth=("api", constants.MAIL_KEY),
-            data={"from": "Mailgun Sandbox <postmaster@sandbox03a400ad1bbd421da31d9dcd3360f748.mailgun.org>",
+            data={"from": sender,
                   "to": to,
                   "subject": subject,
                   "text": msg})
@@ -29,7 +40,7 @@ class Twitter():
         auth = tweepy.OAuthHandler(consumer_key=constants.TWITTER_CONSUMER_KEY,consumer_secret=constants.TWITTER_CONSUMER_SECRET)
         auth.set_access_token(key=constants.TWITTER_KEY,secret=constants.TWITTER_SECRET)
         api = tweepy.API(auth)
-        return api.search(q="Stemettes")
+        return api.search(q=tag)
 
 class Foursquare():
     def exploreVenues(self, name):
