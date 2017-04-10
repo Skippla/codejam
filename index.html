@@ -14,7 +14,6 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
     {# Custom JavaScript #}
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
-
     {# Page Title #}
     <title>Food, Coding, Weekend</title>
 </head>
@@ -30,6 +29,12 @@
         {# right hand-side #}
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <form id="my_form" method="post" action="/game">
+                        <a href="javascript:{}" onclick="document.getElementById('my_form').submit(); return false;">Game</a>
+
+                    </form>
+                </li>
                 <li>
                     <a href="#send-email">Mailgun</a>
                 </li>

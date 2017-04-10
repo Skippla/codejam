@@ -31,4 +31,22 @@ $(document).ready(function(){
 
     map.on('click', onMapClick);
     map.on('popupclose', onPopupClose);
+
+    //Adding post when on click
+    $(".navbar").on("click", '#nav-game', function(e){
+        //$.post("game", url: '/signUpUser');
+        $.ajax({
+            url: '/game',
+            data: $('form').serialize(),
+            type: 'POST',
+            success: function(response) {
+                console.log(response);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+        e.stopPropagation();
+    });
+
 });

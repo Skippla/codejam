@@ -8,10 +8,18 @@ from api import *
 
 template_dir = os.path.dirname(os.path.abspath(__file__))
 app = Flask(__name__, template_folder=template_dir)
+import json
+from watson_developer_cloud import ConversationV1
 
+conversation = ConversationV1(
+        username='5afebac5-b78a-41ff-af20-9139caae644e',
+        password='tMxm0cxx0kwV',
+        version='2016-09-20')
+context = {}
     
 @app.route("/")
 def index():
+    print 'INDEX'
     return render_template("index.html")
 
 @app.route("/<name>")
@@ -102,4 +110,32 @@ def aftership_Create_Shipment():
     ShipmentInfo = a.createShipment(slug,number,title)
     return render_template("index.html", ShipmentInfo=ShipmentInfo)
 
-app.run(host=os.getenv('IP', '0.0.0.0'),port=int(os.getenv('PORT', 8080)))
+@app.route("/game", methods=['POST'])
+def game():
+    print 'GAME'
+    global context, conversation
+    workspace_id = '54555911-c3e9-475d-bb16-a726d3b44dc8'
+    form_data = request.form
+    answer = form_data['answer']
+    result = conversation.message(workspace_id=workspace_id, message_input={'text': answer},context=context)
+    context=result['context']
+    response = result['output']['text'][0]
+    print(response)
+    return render_template("game.html",response=response)
+
+
+@app.route("/watson", methods=['POST'])
+def watson():
+    global context, conversation
+    workspace_id = '54555911-c3e9-475d-bb16-a726d3b44dc8'
+    form_data = request.form
+    answer = form_data['answer']
+    result = conversation.message(workspace_id=workspace_id, message_input={'text': answer},context=context)
+    context=result['context']
+    response = result['output']['text'][0]
+    print(response)
+    return render_template("game.html",response=response)
+
+#app.run(host=os.getenv('IP', '0.0.0.0'),port=int(os.getenv('PORT', 8080)))
+if __name__ == "__main__":
+    app.run()
