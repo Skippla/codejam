@@ -1,6 +1,6 @@
 __author__ = 'Maria'
 
-import json
+import constants
 from watson_developer_cloud import ConversationV1
 import urllib3
 import pprint
@@ -9,20 +9,11 @@ urllib3.disable_warnings()
 class Watson(object):
 
     def __init__(self):
-        self.credentials = {
-            "url": "https://gateway.watsonplatform.net/conversation/api",
-            "username": "2fa5e07f-b6e1-4b3e-9397-7dbf3377d659",
-            "password": "RUGqNZeQBaUf" ,
-            "workspacename": "WatsonTest",
-            "workspaceID": "f084a44a-6973-4080-92b6-3ab662b24547",
-            "workspaceURL": "https://gateway.watsonplatform.net/conversation/api/v1/workspaces/f084a44a-6973-4080-92b6-3ab662b24547/message/",
-            "version": "2016-09-20"
-        }
 
         self.conversation = ConversationV1(
-            username=self.credentials['username'],
-            password=self.credentials['password'],
-            version=self.credentials['version'], )
+            username=constants.WATSON['username'],
+            password=constants.WATSON['password'],
+            version=constants.WATSON['version'], )
 
         self.context = None
 
@@ -39,7 +30,7 @@ class Watson(object):
         self.context = response['context']
 
     def askWatson(self, text):
-        response = self.conversation.message(workspace_id=self.credentials['workspaceID'], message_input={'text': text}, context=self.context)
+        response = self.conversation.message(workspace_id=constants.WATSON['workspaceID'], message_input={'text': text}, context=self.context)
         self.setContext(response)
         return response
 
