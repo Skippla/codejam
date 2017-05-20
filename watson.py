@@ -2,9 +2,7 @@ __author__ = 'Maria'
 
 import constants
 from watson_developer_cloud import ConversationV1
-import urllib3
 import pprint
-urllib3.disable_warnings()
 
 class Watson(object):
 
