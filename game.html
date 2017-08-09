@@ -32,7 +32,6 @@
                 <li>
                     <form id="my_form" method="post" action="/game">
                         <a href="javascript:{}" onclick="document.getElementById('my_form').submit(); return false;">Game</a>
-
                     </form>
                 </li>
                 <li>
@@ -84,7 +83,8 @@
                     <div class="form-group">
                         <label for="answer" class="col-sm-2 control-label">Answer:</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="answer" name="answer" value="" placeholder="hi" required="required" />
+                            <input type="text" class="form-control" id="answer" name="answer" value="" placeholder="Bonjour" required="required" />
+                            <input type="hidden" value="{{ context }}" name="context" id="context"/>
                         </div>
                     </div>
 

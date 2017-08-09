@@ -11,11 +11,12 @@ app = Flask(__name__, template_folder=template_dir)
 import json
 from watson_developer_cloud import ConversationV1
 
-conversation = ConversationV1(
-        username='5afebac5-b78a-41ff-af20-9139caae644e',
-        password='tMxm0cxx0kwV',
-        version='2016-09-20')
-context = {}
+CONVERSATION = ConversationV1(
+        username='825f6457-82d9-4d80-9073-9f6cf7d9947d',
+        password='MqMWQu3hwwF3',
+        version='2017-08-05')
+WORKSPACE_ID = 'ac827c64-04d4-47b7-b2c5-4d8a61349dd7'
+
     
 @app.route("/")
 def index():
@@ -110,31 +111,21 @@ def aftership_Create_Shipment():
     ShipmentInfo = a.createShipment(slug,number,title)
     return render_template("index.html", ShipmentInfo=ShipmentInfo)
 
-@app.route("/game", methods=['POST'])
-def game():
-    print 'GAME'
-    global context, conversation
-    workspace_id = '54555911-c3e9-475d-bb16-a726d3b44dc8'
-    form_data = request.form
-    answer = form_data['answer']
-    result = conversation.message(workspace_id=workspace_id, message_input={'text': answer},context=context)
-    context=result['context']
-    response = result['output']['text'][0]
-    print(response)
-    return render_template("game.html",response=response)
+
+def speak(message, context):
+    result = CONVERSATION.message(workspace_id=WORKSPACE_ID, message_input={'text': message}, context=context)
+    return result['output']['text'][0], result['context']
 
 
 @app.route("/watson", methods=['POST'])
-def watson():
-    global context, conversation
-    workspace_id = '54555911-c3e9-475d-bb16-a726d3b44dc8'
+@app.route("/game", methods=['POST'])
+def conversation():
     form_data = request.form
-    answer = form_data['answer']
-    result = conversation.message(workspace_id=workspace_id, message_input={'text': answer},context=context)
-    context=result['context']
-    response = result['output']['text'][0]
-    print(response)
-    return render_template("game.html",response=response)
+    message = form_data.get('answer', '')
+    context = json.loads(form_data.get('context', "{}"))
+    response, context = speak(message, context)
+    return render_template("game.html", response=response, context=json.dumps(context))
+
 
 #app.run(host=os.getenv('IP', '0.0.0.0'),port=int(os.getenv('PORT', 8080)))
 if __name__ == "__main__":
