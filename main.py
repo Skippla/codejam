@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 import os
+
 from flask import Flask
 from flask import render_template
 from flask import request
@@ -19,6 +20,8 @@ CONVERSATION = ConversationV1(
         password='3X4GfI4qnbOB',
         version='2017-10-01')
 WORKSPACE_ID = '27511189-bce7-48ad-85b9-ff79b5d9d4ff'
+
+
 
     
 @app.route("/")
@@ -130,7 +133,39 @@ def conversation():
     response, context = speak(message, context)
     return render_template("watson.html", response=response, context=json.dumps(context))
 
+import json
+from watson_developer_cloud import VisualRecognitionV3
+
+VISUAL_REC = VisualRecognitionV3('2017-10-24', api_key='64a5583a8517eea1f0c020161c1b65f09b0cc07e')
+
+
+@app.route("/watsonImgRec", methods=['GET'])
+def imgRec():
+    images = [
+        {'image_id': 0, 'path': 'https://s-i.huffpost.com/gen/4451422/images/o-FOOD-facebook.jpg'},
+        {'image_id': 1, 'path': 'http://cdn.akc.org/content/hero/puppy-boundaries_header.jpg'},
+        {'image_id': 2, 'path': 'https://image.freepik.com/free-vector/writting-pencil-design_1095-187.jpg'},
+    ]
+    responseImg = None
+    image_id = request.args.get('id', None)
+    if image_id:
+        print image_id
+        print images
+        test_url = [img['path'] for img in images if img['image_id']==int(image_id)]
+        print test_url[0]
+        url_result = VISUAL_REC.classify(images_url=test_url[0])
+
+        rightWord = any([True if 'food' in className['class'] else False for className in url_result['images'][0]['classifiers'][0]['classes']])
+
+        if rightWord:
+            responseImg = 'Well done!'
+        else:
+            responseImg = 'Please try again'
+
+
+    return render_template("index.html", images=images, task='Comida', responseImg=responseImg)
+
 
 #app.run(host=os.getenv('IP', '0.0.0.0'),port=int(os.getenv('PORT', 8080)))
 if __name__ == "__main__":
-    app.run(port=65438)
+    app.run(port=65431)
