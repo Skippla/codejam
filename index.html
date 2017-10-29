@@ -46,7 +46,6 @@
 
     $(document).ready(function(){
         queryApp('#watsonform', '#watsonService');
-        queryApp('#watsonImg', '#watsonImgRec');
     });
     </script>
   </head>
@@ -66,10 +65,7 @@
               <a class="nav-link js-scroll-trigger" href="#about">About</a>
             </li>
               <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#watsonService">Watson Conversation</a>
-            </li>
-              <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#watsonImgRec">Watson Img Rec</a>
+              <a class="nav-link js-scroll-trigger" href="#watsonService">Watson</a>
             </li>
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="#uberProducts">Uber</a>
@@ -125,57 +121,30 @@
                         <hr class="section-heading-spacer">
                         <div class="clearfix"></div>
                         <h2 class="section-heading">Watson</h2>
-                        <p class="lead">{% if response %}{{ response }}{% endif %}
+                        <p>Quickly build and deploy chatbots and virtual agents across a variety of channels, including mobile devices, messaging platforms, and even robots.
+                                <a href = 'https://www.ibm.com/watson/developercloud/conversation/api/v1/?python#get_intents' target="_blank">Read more</a>
                         </p>
+
                     </div>
                     {# right hand side #}
                     <div class="col-lg-5 col-lg-offset-2 col-sm-6 right-col">
+                        <p class="lead">{% if question %}>{{ question }}{% endif %}</p>
+                        <p class="lead">{% if response %}>{{ response }}{% endif %}</p>
                         <form id='watsonform' class="form-horizontal" method="post" action="/watson">
                             <div class="form-group">
-                                <label for="answer" class="col-sm-2 control-label">Answer:</label>
+                                <label for="question" class="col-sm-6 control-label">Try something:</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="answer" name="answer" value="" placeholder="Bonjour" required="required" />
+                                    <input type="text" class="form-control" id="question" name="question" value="" placeholder="..." required="required" />
                                     <input type="hidden" value="{{ context }}" name="context" id="context"/>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-10">
-                                    <button type="submit" class="btn btn-default" id="submit-button">Answer</button>
+                                    <button type="submit" class="btn btn-default" id="submit-button">Ask</button>
                                 </div>
                             </div>
                         </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="services" id="watsonImgRec">
-      <div class="container-fluid">
-        <div class="content-section-a" id="img-Form">
-            <div class="container">
-                <div class="row">
-                    {# left hand side #}
-                    <div class="col-lg-5 col-sm-6">
-                        <hr class="section-heading-spacer">
-                        <div class="clearfix"></div>
-                        <h2 class="section-heading">Watson Image Recognition</h2>
-                        <p class="lead">Select an image that contains: {% if task %}{{ task }}{% endif %}
-                        </p>
-                        <p class="lead">{% if responseImg %}{{ responseImg }}{% endif %}
-                        </p>
-                    </div>
-                    {# right hand side #}
-                    <div class="portfolio-box">
-                    <div class="watson_img" id="watsonImg">
-                        {% for image in images %}
-                            <a href="/watsonImgRec?id={{ image.image_id }}">
-                                <img src="{{ image.path }}" weight="100" height="100" alt="">
-                            </a>
-                        {% endfor %}
-                    </div>
                     </div>
                 </div>
             </div>
