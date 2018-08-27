@@ -3,3 +3,5 @@
 api.pyc
 constants.pyc
 COMMIT_EDITMSG.swp
+node_modules
+bower_components
